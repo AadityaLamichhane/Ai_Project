@@ -2,18 +2,18 @@
 import { getEntries, updateEntried } from '@/utils/api';
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react';
-export default function JornalWithId() {
+export default function JournalWithId() {
 	const [content, setContent] = useState('');
 	const params = useParams()
 	const id = params.id ?? ""
 	useEffect(() => {
-		console.log('Gettig the id as the string');
+		console.log('Getting the id as the string');
 		getEntries(id as string).then((content_FromBackend) => {
 			setContent(content_FromBackend.data.content);
 		})
 	}, [])
 	const onclickFunction = async () => {
-		await updateEntried(id as string);
+		await updateEntried(id as string, content);
 
 	}
 

@@ -5,11 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest) => {
 
 	const user = await getUserByclerkId();
-	const data = await req.body;
-	console.log('data of post request is ', data);
+	const content = await req.json();
+	console.log('content', content);
+	console.log('Content of this is', content);
 	const entries = await prisma.posts.create({
 		data: {
-			content: data as any,
+			content: content?.data as any || "",
 			userId: user.id
 		}
 	});
