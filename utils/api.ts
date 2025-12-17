@@ -5,13 +5,11 @@ const createUrl = (path: string) => {
 export const createNewEntries = async (content: string) => {
 	const res = await fetch(new Request(createUrl("/api/journal"), {
 		method: "POST",
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({ content: content || "This is random header text file " }) // Fallback while there is no any entry
+		body: JSON.stringify({ content }) // Fallback while there is no any entry
 	}))
 	if (res.ok) {
-		const data = await res.json()
+		const data = await res.json();
+		console.log("Data inserted in the body is ", data.data);
 		return data.data;
 	}
 }
@@ -21,16 +19,17 @@ export const getEntries = async (content_id: string) => {
 	}));
 	if (res.ok) {
 		const data = await res.json() // Parsing the json file ftom the component
-		return data;
+		return data.data;
 	}
 }
 export const updateEntry = async (contentId: string, content: string) => {
+	console.log('Updatinhe data ');
 	const res = await fetch(new Request(createUrl(`/api/journal/${contentId}`), {
 		method: "PATCH",
 		headers: {
 			'Content-type': 'application/json',
 		},
-		body: JSON.stringify({ content: content })
+		body: JSON.stringify({ content })
 	}))
 	if (res.ok) {
 		const data = await res.json()

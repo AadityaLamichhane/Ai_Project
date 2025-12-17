@@ -1,13 +1,16 @@
 "use client"
 import { createNewEntries } from "@/utils/api"
 import { useRouter } from "next/navigation"
+
 const NewEntry = () => {
-	const content = "Hello this is the new content to be inserted in the journal this is from the new entry of the journal not the updated entry of this journal"
 	const router = useRouter();
+	const BASE_URL = process.env.BASE_URL;
 	const handleOnClick = async () => {
-		const data = await createNewEntries(content as string);
+		const data = await createNewEntries("");
 		console.log(data);
-		router.push(`/journal/${data.id}`)
+		const value = window.location.href;
+		window.location.href = `${BASE_URL}/journal/${data.id}`
+		//router.push(`/journal/${data.id}`)
 	}
 	return <>
 		<div

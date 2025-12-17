@@ -1,7 +1,6 @@
 import NewEntry from "@/components/NewEntry";
 import { getUserByclerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db";
-
 const entries = async () => {
 	const user = await getUserByclerkId();
 	const entries = await prisma.posts.findMany({
@@ -12,7 +11,6 @@ const entries = async () => {
 	return entries || [];
 }
 const JournalPage = async () => {
-
 	const entryArray = await entries()
 	return (<>
 		{/* Add the padding and make the title  */}
@@ -25,12 +23,10 @@ const JournalPage = async () => {
 					return <div key={element.id}>
 						{element.content} This is the number of the post
 					</div>
-
 				})}
 
 			</div>
 		</div>
 	</>)
 }
-
 export default JournalPage
