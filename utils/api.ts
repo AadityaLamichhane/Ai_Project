@@ -1,6 +1,5 @@
 const createUrl = (path: string) => {
 	return window.location.origin + path;
-
 }
 export const createNewEntries = async (content: string) => {
 	const res = await fetch(new Request(createUrl("/api/journal"), {

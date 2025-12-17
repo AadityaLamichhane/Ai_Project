@@ -3,9 +3,8 @@ import { getUserByclerkId } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 export const GET = async (req: NextRequest, context: { params: { id: string } }) => {
 	const user = await getUserByclerkId();
-	const params = await context.params;
+	const params = await context.params; // This indeed is the prmomise function  that depends on the requ 
 	const id = params.id;
-	console.log('Getting information fot ', params);
 	const entries = await prisma.posts.findFirst({
 		where: {
 			id: id,
@@ -16,10 +15,11 @@ export const GET = async (req: NextRequest, context: { params: { id: string } })
 }
 export const PATCH = async (req: NextRequest, context: { params: { id: string } }) => {
 	const user = await getUserByclerkId();
-	const paramsValue = context.params;
+	const paramsValue = await context.params;
 	const jsonContent = await req.json();
+	console.log("updating json content", jsonContent);
 	if (paramsValue != undefined && paramsValue != null) {
-		const Updatedentries = await prisma.posts.update({
+		const UpdateEntry = await prisma.posts.update({
 			where: {
 				id: (paramsValue.id) as any,
 				userId: user.id
@@ -28,7 +28,7 @@ export const PATCH = async (req: NextRequest, context: { params: { id: string } 
 				userId: user.id
 			}
 		});
-		return NextResponse.json({ data: Updatedentries });
+		return NextResponse.json({ data: UpdateEntry });
 	}
 	return NextResponse.json({ data: [] })
 }
