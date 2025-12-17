@@ -1,6 +1,7 @@
 import NewEntry from "@/components/NewEntry";
 import { getUserByclerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db";
+import Link from "next/link";
 const entries = async () => {
 	const user = await getUserByclerkId();
 	const entries = await prisma.posts.findMany({
@@ -20,13 +21,14 @@ const JournalPage = async () => {
 				<NewEntry>
 				</NewEntry>
 				{entryArray.map((element) => {
-					return <div key={element.id}>
-						{element.content} This is the number of the post
-					</div>
+					return <Link key={element.id} href={`journal/${element.id}`} className="  p-4 border border-zinc-400/45 bg-zinc-100 rounded-sm shadow-amber-100 cursor-pointer">
+						<div key={element.id}>
+							{element.content} This is the number of the post
+						</div>
+					</Link>
 				})}
-
 			</div>
-		</div>
+		</div >
 	</>)
 }
 export default JournalPage
