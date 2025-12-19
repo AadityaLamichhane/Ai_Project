@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 export default function Home() {
-
 	return (
 		<div className="w-screen h-screen bg-black  flex justify-center items-center text-white">
 			<div className="flex justify-center items-center ">
@@ -12,10 +11,10 @@ export default function Home() {
 						</div>
 						<div className="flex p-4 gap-2 items-center justify-center text-xl">
 							<div className="">
-								Know the moood 
+								Know the moood
 							</div>
 							<div>
-								Know your letter 
+								Know your letter
 							</div>
 						</div>
 					</div>

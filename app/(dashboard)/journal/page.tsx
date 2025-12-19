@@ -1,4 +1,6 @@
 import NewEntry from "@/components/NewEntry";
+import DeleteComponent from "@/components/Delete"
+import { X } from 'lucide-react';
 import { getUserByclerkId } from "@/utils/auth"
 import { prisma } from "@/utils/db";
 import Link from "next/link";
@@ -8,8 +10,10 @@ const entries = async () => {
 		where: {
 			userId: user.id
 		}
-	})
+	});
+	console.log('Get the entries + journal revieq');
 	return entries || [];
+
 }
 const JournalPage = async () => {
 	const entryArray = await entries()
@@ -21,9 +25,10 @@ const JournalPage = async () => {
 				<NewEntry>
 				</NewEntry>
 				{entryArray.map((element) => {
-					return <Link key={element.id} href={`journal/${element.id}`} className="  p-4 border border-zinc-400/45 bg-zinc-100 rounded-sm shadow-amber-100 cursor-pointer">
-						<div key={element.id}>
-							{element.content} This is the number of the post
+					return <Link key={element.id} href={`journal/${element.id}`} className="  p-4 border border-zinc-400/45 bg-zinc-100 rounded-sm shadow-amber-100 cursor-pointer relative group">
+						<div key={element.id} className="flex">
+							{element.content}
+							<DeleteComponent id={element.id} />
 						</div>
 					</Link>
 				})}
