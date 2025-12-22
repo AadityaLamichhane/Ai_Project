@@ -32,3 +32,13 @@ export const PATCH = async (req: NextRequest, context: { params: { id: string } 
 	}
 	return NextResponse.json({ data: [] })
 }
+export const DELETE = async (req: NextRequest, context: { params: { id: string } }) => {
+	const user = await getUserByclerkId();
+	const paramsValue = await context.params;
+	const deleteId = paramsValue.id;
+	if (!deleteId) {
+		console.log('This is the deleteing id of the content');
+	}
+
+
+}

@@ -5,7 +5,6 @@ const NewEntry = () => {
 	const router = useRouter();
 	const handleOnClick = async () => {
 		const data = await createNewEntries("");
-		console.log(data);
 		const value = window.location.href;
 		window.location.href = `journal/${data.id}`
 	}
